@@ -16,12 +16,12 @@ def get_vacancies(event):
 	vac = []
 	#print('Ожидайте, поиск займет до '+str(p*2)+' секунд')
 	for i in tqdm(range(0, p)):
-    	vac.append(requests.get(target_text, params={'page': i, 'per_page':20}).json())
+		vac.append(requests.get(target_text, params={'page': i, 'per_page':20}).json())
 	#Выгрузка вакансий
 	vac_row=[]
 	for i in range(0,p):
-    	l=len(vac[i]['items'])
-    	for j in range (0,l):
-        	vac_row.append(vac[i]['items'][j])
+		l=len(vac[i]['items'])
+		for j in range (0,l):
+			vac_row.append(vac[i]['items'][j])
 	df=pd.DataFrame.from_dict(vac_row, orient='columns') 
 	print('Вакансий найдено:',len(df.name))
