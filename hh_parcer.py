@@ -1,7 +1,7 @@
 #Basic Libraries
 import numpy as np
 import requests
-from tqdm.notebook import tqdm as tqdm
+import tqdm 
 import pandas as pd
 import matplotlib.pyplot as plt
 #Pyscript
@@ -11,7 +11,7 @@ from pyscript import display
 text=document.querySelector("#vacancy_name")
 def get_vacancies(event):
 	target_text='https://api.hh.ru/vacancies?text='+text
-	r = requests.get(target_text).json() 
+	r = requests.get(target_text).json()
 	p=r['pages'] #Кол-во страниц выдачи
 	vac = []
 	#print('Ожидайте, поиск займет до '+str(p*2)+' секунд')
@@ -23,5 +23,5 @@ def get_vacancies(event):
 		l=len(vac[i]['items'])
 		for j in range (0,l):
 			vac_row.append(vac[i]['items'][j])
-	df=pd.DataFrame.from_dict(vac_row, orient='columns') 
+	df=pd.DataFrame.from_dict(vac_row, orient='columns')
 	print('Вакансий найдено:',len(df.name))
