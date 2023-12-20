@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from pyscript import document
 from pyscript import display
 #Get vacancies
-text=document.querySelector("#vacancy_name")
+text=str(document.querySelector("#vacancy_name"))
 def get_vacancies(event):
 	target_text='https://api.hh.ru/vacancies?text='+text
 	r = requests.get(target_text).json()
