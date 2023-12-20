@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
+      <title>Numpy FS test</title>
+	  <!--<link rel="stylesheet" href="https://pyscript.net/releases/2023.12.1/core.css">-->
+	  <link rel="stylesheet" href="./styles.css">
+      <script type="module" src="https://pyscript.net/releases/2023.12.1/core.js"></script>
+	  <py-config>
+    packages= ["numpy","arrr","matplotlib","seaborn"]
+	  </py-config>
+<style>
+#hist {
+  background-color: lightblue;
+  position: absolute;
+  width: 500px;
+  height: 400px;
+  top: 50%;
+  left: 50%;
+}
+</style>	  
+</head>
+
+<body>
+<p>Вычисляем квадратный корень :</p>
+<input type="text" name="Число" id="num" placeholder="Введите число" />
+<button py-click="get_root">Выполнить</button>
+</br></br>
+<div id="output"></div>
+<script type="py" src="./main.py"></script>	
+
+<button class="button button1" py-click="draw_hist"> <b>Гиста</b></button>
+
+<div id="hist"></div>
+
+</body>
+</html>
