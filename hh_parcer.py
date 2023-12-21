@@ -12,14 +12,15 @@ from pyscript import display
 text=str(document.querySelector("#vacancy_name"))
 def get_vacancies(event):
 	target_text='https://api.hh.ru/vacancies?text='+text
-	response = await pyfetch(url, method="GET", headers=headers)
-	r = await response.json()
+	response = await pyfetch(url, method="GET")
+	r =response.json()
 	print(r)
 	p=r['pages'] #Кол-во страниц выдачи
 	vac = []
 	#print('Ожидайте, поиск займет до '+str(p*2)+' секунд')
 	for i in tqdm(range(0, p)):
-		vac.append(await pyfetch(url, method="GET", headers=headers, params={'page': i, 'per_page':20}).json())
+		v=await pyfetch(url, method="GET", params={'page': i, 'per_page':20})
+		vac.append(v.json())
 	#Выгрузка вакансий
 	vac_row=[]
 	for i in range(0,p):
