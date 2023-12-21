@@ -4,7 +4,7 @@ import requests
 import tqdm 
 import pandas as pd
 import matplotlib.pyplot as plt
-from pyodide.http import pyfetch, FetchResponse
+import pyodide
 #Pyscript
 from pyscript import document
 from pyscript import display
