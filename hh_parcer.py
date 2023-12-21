@@ -1,26 +1,30 @@
 #Basic Libraries
 import numpy as np
-import requests
 import tqdm 
 import pandas as pd
 import matplotlib.pyplot as plt
-import pyodide
+import json
+from pyodide.http import open_url
 #Pyscript
 from pyscript import document
 from pyscript import display
 #Get vacancies
-text=str(document.querySelector("#vacancy_name"))
+#output for test
+output_test = document.querySelector("#output_vacancies")
+#get_vacancies function
 def get_vacancies(event):
+	text=str(document.querySelector("#vacancy_name").value)
 	target_url='https://api.hh.ru/vacancies?text='+text
-	response = pyodide.http.open_url(target_url)
-	r =response.json()
-	print(r)
+	r = json.loads(open_url(target_url).read())
 	p=r['pages'] #Кол-во страниц выдачи
 	vac = []
 	#print('Ожидайте, поиск займет до '+str(p*2)+' секунд')
-	for i in tqdm(range(0, p)):
-		v=pyodide.http.open_url(target_url+'?page='+i+'?per_page=20')
-		vac.append(v.json())
+	for i in range(0, p):
+		page_url=target_url+'&page='+str(i)+'&per_page=20'
+		page=open_url(page_url).read()
+		v=json.loads(page)
+		vac.append(v)
+		output_test.innerText =('Загрузка:'+str(i)+' из'+str(p))
 	#Выгрузка вакансий
 	vac_row=[]
 	for i in range(0,p):
@@ -29,6 +33,6 @@ def get_vacancies(event):
 			vac_row.append(vac[i]['items'][j])
 	df=pd.DataFrame.from_dict(vac_row, orient='columns')
 	print('Вакансий найдено:',len(df.name))
-
+	output_test.innerText = 'Вакансий найдено:'+str(len(df.name))
 
 

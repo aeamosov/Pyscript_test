@@ -9,11 +9,11 @@
 	  <link rel="stylesheet" href="./styles.css">
       <script type="module" src="https://pyscript.net/releases/2023.12.1/core.js"></script>
 	  <py-config>
-    packages= ["numpy","requests","pandas","matplotlib","tqdm","seaborn"]
+    packages= ["numpy","pandas","matplotlib","tqdm","seaborn"]
 	  </py-config>
 <style>
 #hist {
-  background-color: lightgreen;
+  background-color: green;
   position: absolute;
   width: 500px;
   height: 400px;
@@ -37,6 +37,7 @@
 <h1>HH_Parcer</h1>
 <input type="text" name="Вакансия" id="vacancy_name" placeholder="Введите имя вакансии" />
 <button class="button button1" py-click="get_vacancies">Выполнить</button>
+<div id="output_vacancies"></div>
 <script type="py" src="./hh_parcer.py"></script>	
 </body>
 </html>
