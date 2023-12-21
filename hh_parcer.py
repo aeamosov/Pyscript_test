@@ -11,15 +11,15 @@ from pyscript import display
 #Get vacancies
 text=str(document.querySelector("#vacancy_name"))
 def get_vacancies(event):
-	target_text='https://api.hh.ru/vacancies?text='+text
-	response = await pyfetch(url, method="GET")
+	target_url='https://api.hh.ru/vacancies?text='+text
+	response = pyodide.open_url(target_url)
 	r =response.json()
 	print(r)
 	p=r['pages'] #Кол-во страниц выдачи
 	vac = []
 	#print('Ожидайте, поиск займет до '+str(p*2)+' секунд')
 	for i in tqdm(range(0, p)):
-		v=await pyfetch(url, method="GET", params={'page': i, 'per_page':20})
+		v=target_url+'?page='+i+'?per_page=20'
 		vac.append(v.json())
 	#Выгрузка вакансий
 	vac_row=[]
@@ -29,7 +29,6 @@ def get_vacancies(event):
 			vac_row.append(vac[i]['items'][j])
 	df=pd.DataFrame.from_dict(vac_row, orient='columns')
 	print('Вакансий найдено:',len(df.name))
-
 
 
 
