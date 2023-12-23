@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
+      <title>PyScript_test</title>
+	  <!--<link rel="stylesheet" href="https://pyscript.net/releases/2023.12.1/core.css">-->
+	  <link rel="stylesheet" href="./styles.css">
+      <script type="module" src="https://pyscript.net/releases/2023.12.1/core.js"></script>
+	  <py-config>
+    packages= ["numpy","pandas","matplotlib","tqdm","seaborn","sqlite3"]
+	  </py-config>	  
+</head>
+
+<body>
+<div class="navbar">
+  <nav>
+     <div class="logo">
+PYSCRIPT_TEST</div>
+<ul class="menu-area">
+<li><a href="index.html">HH_Parcer</a></li>
+<li><a href="Plot_and_calc_test.html">Тест калькуляций</a></li>
+</ul>
+</nav>    
+</div>
+</br>
+<h1>Тест калькуляций и графиков</h1>
+
+<p>Вычисляем квадратный корень :</p>
+<input type="text" name="Число" id="num" placeholder="Введите число" />
+<button py-click="get_root">Выполнить</button>
+</br></br>
+<div id="output"></div>
+<script type="py" src="./main.py"></script>	
+
+<button class="button button1" py-click="draw_hist"> <b>Гиста</b></button>
+
+<div id="hist"></div>
+
+</body>
+</html>

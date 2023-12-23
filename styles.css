@@ -1,3 +1,73 @@
+body {
+  background-image: url(https://images.pexels.com/photos/934718/pexels-photo-934718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  -webkit-background-size:cover;
+  background-size:cover;
+  background-position: center center;
+  height: 100vh;
+    font-family: poppins;
+}
+.navbar{
+  padding-top: 25px;
+}
+nav {
+ position: relative;
+ width: calc(100% - 60px);
+ margin: 0 auto;
+ background: #000000;
+ z-index: 1;
+ text-align: right;
+ padding-right: 2%;
+}
+.logo {
+  width: 25%;
+  float: left;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 25px;
+  text-align: left;
+  padding: 10px 25px;
+}
+.menu-area li {
+  display: inline-block;
+    list-style-type: none;
+}
+.menu-area a {
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  padding: 15px 25px;
+  font-size: 14px;
+  line-height: 30px;
+  position: relative;
+  z-index: 1;
+    text-decoration: none;    
+}
+.menu-area a:hover {
+  background: deeppink;
+  color: #fff;
+}
+nav:before {
+  position: absolute;
+  content: '';
+  border-top: 10px solid #333;
+  border-right: 10px solid #333;
+  border-left: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  top: 100%;
+  left: 0;
+}
+nav:after {
+  position: absolute;
+  content: '';
+  border-top: 10px solid #333;
+  border-left: 10px solid #333;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  top: 100%;
+  right: 0;
+}
 mpy-config,mpy-script,py-config,py-script{display:none}
 .mpy-editor-box,.py-editor-box{padding:.5rem}
 .mpy-editor-input,.py-editor-input{position:relative}
@@ -7,12 +77,12 @@ mpy-config,mpy-script,py-config,py-script{display:none}
 .mpy-editor-box:hover .mpy-editor-run-button,.mpy-editor-run-button:disabled,.mpy-editor-run-button:focus,.py-editor-box:hover .py-editor-run-button,.py-editor-run-button:disabled,.py-editor-run-button:focus{opacity:1}
 .button {
   border: none;
-  color: white;
+  color: black;
   padding: 8px 16px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
@@ -28,3 +98,5 @@ mpy-config,mpy-script,py-config,py-script{display:none}
   background-color: #04AA6D;
   color: white;
 }
+
+

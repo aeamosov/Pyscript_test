@@ -24,7 +24,6 @@ def get_vacancies(event):
 		page=open_url(page_url).read()
 		v=json.loads(page)
 		vac.append(v)
-		output_test.innerText =('Загрузка:'+str(i)+' из'+str(p))
 	#Выгрузка вакансий
 	vac_row=[]
 	for i in range(0,p):
@@ -34,5 +33,4 @@ def get_vacancies(event):
 	df=pd.DataFrame.from_dict(vac_row, orient='columns')
 	print('Вакансий найдено:',len(df.name))
 	output_test.innerText = 'Вакансий найдено:'+str(len(df.name))
-
-
+	
