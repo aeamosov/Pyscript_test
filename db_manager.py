@@ -20,4 +20,5 @@ def create_db(event):
 				(2,'Test_name_2')
           ''')
 	conn.commit()
+	
 	db_status.innerText = "DB is ready"

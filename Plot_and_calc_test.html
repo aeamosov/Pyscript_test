@@ -10,21 +10,34 @@
       <script type="module" src="https://pyscript.net/releases/2023.12.1/core.js"></script>
 	  <py-config>
     packages= ["numpy","pandas","matplotlib","tqdm","seaborn","sqlite3"]
-	  </py-config>	  
+	  </py-config>
+	  <style>
+            #loading { outline: none; border: none; background: transparent }
+      </style>
+	  <script type="module">
+            const loading = document.getElementById('loading');
+            addEventListener('py:ready', () => loading.close());
+            loading.showModal();
+      </script>	  	  
 </head>
 
 <body>
+<dialog id="loading">
+	<h1>Загрузка модулей...</h1>
+</dialog>
 <div class="navbar">
-  <nav>
-     <div class="logo">
-PYSCRIPT_TEST</div>
-<ul class="menu-area">
-<li><a href="index.html">HH_Parcer</a></li>
-<li><a href="Plot_and_calc_test.html">Тест калькуляций</a></li>
-</ul>
-</nav>    
+	<nav>
+     	<div class="logo">
+			PYSCRIPT_TEST
+		</div>
+		<ul class="menu-area">
+			<li><a href="index.html">HH_Parcer</a></li>
+			<li><a href="Plot_and_calc_test.html">Тест калькуляций</a></li>
+		</ul>
+	</nav>    
 </div>
 </br>
+
 <h1>Тест калькуляций и графиков</h1>
 
 <p>Вычисляем квадратный корень :</p>
@@ -32,7 +45,7 @@ PYSCRIPT_TEST</div>
 <button py-click="get_root">Выполнить</button>
 </br></br>
 <div id="output"></div>
-<script type="py" src="./main.py"></script>	
+<script type="py" src="./test.py"></script>	
 
 <button class="button button1" py-click="draw_hist"> <b>Гиста</b></button>
 

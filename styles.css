@@ -1,13 +1,6 @@
-body {
-  background-image: url(https://images.pexels.com/photos/934718/pexels-photo-934718.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
-  -webkit-background-size:cover;
-  background-size:cover;
-  background-position: center center;
-  height: 100vh;
-    font-family: poppins;
-}
+.loading { outline: none; border: none; background: transparent }
 .navbar{
-  padding-top: 25px;
+  padding-top: 0px;
 }
 nav {
  position: relative;
@@ -26,6 +19,7 @@ nav {
   font-size: 25px;
   text-align: left;
   padding: 10px 25px;
+  font-family: "Lucida Console", "Courier New", monospace;
 }
 .menu-area li {
   display: inline-block;
@@ -37,7 +31,7 @@ nav {
   letter-spacing: 1px;
   text-transform: uppercase;
   display: block;
-  padding: 15px 25px;
+  padding: 10px 25px;
   font-size: 14px;
   line-height: 30px;
   position: relative;
@@ -45,29 +39,10 @@ nav {
     text-decoration: none;    
 }
 .menu-area a:hover {
-  background: deeppink;
+  background: green;
   color: #fff;
 }
-nav:before {
-  position: absolute;
-  content: '';
-  border-top: 10px solid #333;
-  border-right: 10px solid #333;
-  border-left: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  top: 100%;
-  left: 0;
-}
-nav:after {
-  position: absolute;
-  content: '';
-  border-top: 10px solid #333;
-  border-left: 10px solid #333;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  top: 100%;
-  right: 0;
-}
+
 mpy-config,mpy-script,py-config,py-script{display:none}
 .mpy-editor-box,.py-editor-box{padding:.5rem}
 .mpy-editor-input,.py-editor-input{position:relative}
@@ -76,6 +51,24 @@ mpy-config,mpy-script,py-config,py-script{display:none}
 .mpy-editor-run-button,.py-editor-run-button{bottom:.5rem;opacity:0;position:absolute;right:.5rem;transition:opacity .25s;z-index:1}
 .mpy-editor-box:hover .mpy-editor-run-button,.mpy-editor-run-button:disabled,.mpy-editor-run-button:focus,.py-editor-box:hover .py-editor-run-button,.py-editor-run-button:disabled,.py-editor-run-button:focus{opacity:1}
 .button {
+	border:none;
+	border-radius:10px;
+	font-size:16px;
+	margin: 4px 2px;
+    min-height:30px; 
+    min-width: 100px;
+	background-color:#0a0a23;
+	color: #fff;
+}
+.button:hover {
+	background-color:#04AA6D;
+    transition: 0.3s;
+  }
+.button:disabled {
+	background-color:grey;
+    transition: 1s;
+  }
+/*.button {
   border: none;
   color: black;
   padding: 8px 16px;
@@ -87,7 +80,6 @@ mpy-config,mpy-script,py-config,py-script{display:none}
   transition-duration: 0.4s;
   cursor: pointer;
 }
-
 .button1 {
   background-color: white;
   color: black;
@@ -96,7 +88,10 @@ mpy-config,mpy-script,py-config,py-script{display:none}
 
 .button1:hover {
   background-color: #04AA6D;
-  color: white;
+  color: grey;
 }
-
-
+.button2 {
+  background-color: grey;
+  color: black;
+}
+*/
