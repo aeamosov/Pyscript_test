@@ -68,6 +68,28 @@ mpy-config,mpy-script,py-config,py-script{display:none}
 	background-color:grey;
     transition: 1s;
   }
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+  width: 55%;
+  
+}
+
+.right {
+  width: 40%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 /*.button {
   border: none;
   color: black;

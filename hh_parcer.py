@@ -1,15 +1,15 @@
 #Basic Libraries
 import numpy as np
-import tqdm 
 import pandas as pd
 import matplotlib.pyplot as plt
 import json
+import seaborn as sns
 from pyodide.http import open_url
 #Pyscript
 from pyscript import document, display, when
-pd.set_option('display.max_rows', 300)
+pd.set_option('display.max_rows', 2000)
 
-#output for test
+#output mapping
 output_test = document.querySelector("#output_vacancies")
 
 #conversion functions for salary
@@ -47,11 +47,15 @@ def calculate_single_number(data_dict):
             return from_value
         else:
             return to_value
-#Очистка городов
+#Очистка городов, работодателей, URL
 def get_city(area):
 	city=area.get('name')
 	return city
-#Очистка URL
+	
+def get_employer(employer):
+	name=employer.get('name')
+	return name
+	
 def clean_url(hh_url):
 	url='https://spb.hh.ru/vacancy/'
 	for i in hh_url:
@@ -75,9 +79,9 @@ def get_vacancies(event):
 			for k in vac.keys():
 				vac[k].append(page_content[j].get(k))
 	df=pd.DataFrame.from_dict(vac, orient='columns')
-	#Очищаем названия городов
+	#Очищаем названия городов,работодателей, URL
 	df['area']=df['area'].apply(get_city)
-	#Очищаем url
+	df['employer']=df['employer'].apply(get_employer)
 	df['url']=df['url'].apply(clean_url)
 	#Фильтруем вакансии по зп и обрабатываем их
 	df = df[df['salary'].notna()].reset_index(drop=True)
@@ -85,7 +89,13 @@ def get_vacancies(event):
 	df['single_number_RUR']= df['salary_RUR'].apply(calculate_single_number)
 	df.loc[df['salary_RUR'].apply(lambda x: not x['gross']), 'single_number_RUR'] /= 0.87
 	df['salary_gross_RUR']=df['single_number_RUR'].apply(round)
-	df=df[['name','area','url','employer','snippet','salary_gross_RUR']]
-	#Вывод пользователю	
+	#df=df.sort_values(by='salary_gross_RUR',ascending=False) Сортировка по ЗП
+	df=df[['name','area','url','employer','salary_gross_RUR']].reset_index(drop=True)
+	#Вывод пользователю таблицы	
 	output_test.innerText = 'Найдено вакансий с открытыми ЗП:'+str(len(df))
 	display(df, target="pandas-output", append=False)
+	#Гистограмма
+	plt.clf()
+	ax=sns.histplot(df['salary_gross_RUR'],bins=int(len(df)/2))
+	salary_hist=ax.get_figure()
+	display(salary_hist, target="statistics", append=False)
