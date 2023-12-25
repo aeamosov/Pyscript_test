@@ -8,10 +8,57 @@ from pyodide.http import open_url
 #Pyscript
 from pyscript import document, display, when
 pd.set_option('display.max_rows', 300)
-#Get vacancies
+
 #output for test
 output_test = document.querySelector("#output_vacancies")
-#get_vacancies function
+
+#conversion functions for salary
+conversion_rates = {
+    'USD': 90,
+    'EUR': 110,
+    'KZT': 0.20
+}
+def convert_to_rur(value, currency):
+    if value is None or currency == 'RUR':
+        return value
+    return value * conversion_rates.get(currency, 1) 
+
+def process_salary(salary_data):
+    from_value = salary_data.get('from')
+    to_value = salary_data.get('to')
+    from_value = convert_to_rur(from_value, salary_data['currency'])
+    to_value = convert_to_rur(to_value, salary_data['currency'])
+    return {
+        'from': from_value,
+        'to': to_value,
+        'currency': 'RUR',
+        'gross': salary_data['gross']
+    }
+def calculate_single_number(data_dict):
+    if data_dict is not None:
+        from_value = data_dict.get('from')
+        to_value = data_dict.get('to')
+
+        if from_value is None and to_value is None:
+            return None
+        elif from_value is not None and to_value is not None:
+            return (from_value + to_value) / 2
+        elif from_value is not None:
+            return from_value
+        else:
+            return to_value
+#Очистка городов
+def get_city(area):
+	city=area.get('name')
+	return city
+#Очистка URL
+def clean_url(hh_url):
+	url='https://spb.hh.ru/vacancy/'
+	for i in hh_url:
+    	if i.isdigit():
+        	url+=str(i)
+	return url
+#Получение вакансий
 @when("click", "#get_vacancies")
 def get_vacancies(event):
 	text=str(document.querySelector("#vacancy_name").value)
@@ -28,5 +75,17 @@ def get_vacancies(event):
 			for k in vac.keys():
 				vac[k].append(page_content[j].get(k))
 	df=pd.DataFrame.from_dict(vac, orient='columns')
-	output_test.innerText = 'Найдено вакансий:'+str(len(df))
+	#Очищаем названия городов
+	df['area']=df['area'].apply(get_city)
+	#Очищаем url
+	df['url']=df['url'].apply(clean_url)
+	#Фильтруем вакансии по зп и обрабатываем их
+	df = df[df['salary'].notna()].reset_index(drop=True)
+	df['salary_RUR']=df['salary'].apply(process_salary)
+	df['single_number_RUR']= df['salary_RUR'].apply(calculate_single_number)
+	df.loc[df['salary_RUR'].apply(lambda x: not x['gross']), 'single_number_RUR'] /= 0.87
+	df['salary_gross_RUR']=df['single_number_RUR'].apply(round)
+	df=df[['name','area','url','employer','snippet','salary_gross_RUR']]
+	#Вывод пользователю	
+	output_test.innerText = 'Найдено вакансий с открытыми ЗП:'+str(len(df))
 	display(df, target="pandas-output", append=False)
