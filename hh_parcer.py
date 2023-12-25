@@ -55,8 +55,8 @@ def get_city(area):
 def clean_url(hh_url):
 	url='https://spb.hh.ru/vacancy/'
 	for i in hh_url:
-    	if i.isdigit():
-        	url+=str(i)
+		if i.isdigit():
+			url+=str(i)
 	return url
 #Получение вакансий
 @when("click", "#get_vacancies")
